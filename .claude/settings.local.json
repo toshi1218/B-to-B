@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /c/Users/toshiyuki/B-to-B/.claude/worktrees/nostalgic-brown log --oneline -10)",
+      "Bash(git -C /c/Users/toshiyuki/B-to-B log --oneline -10)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(npx create-next-app@latest temp-init --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(npx create-next-app@15 temp-init --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(npm install next-intl lucide-react react-hook-form @hookform/resolvers zod)",
+      "WebFetch(domain:ph-document.com)",
+      "Bash(npm run build)"
+    ]
+  }
+}
