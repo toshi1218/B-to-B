@@ -24,7 +24,7 @@ const categories = [
   {
     key: "category_d",
     icon: Building2,
-    href: "/ja/inheritance",
+    href: "/ja/services#inheritance",
     color: "bg-purple-50 text-purple-700",
   },
 ];
