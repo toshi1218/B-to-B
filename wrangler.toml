@@ -1,5 +1,8 @@
-name = "igrs-b2b"
+name = "btob"
 compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
 
 [site]
 bucket = "./out"
