@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0d1423] text-gray-400">
       <div className="container-site py-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           {/* Brand */}
           <div className="flex flex-col gap-3">
             <span className="text-xl font-bold text-white">IGRS</span>
@@ -27,11 +27,27 @@ export default function Footer() {
               <Link href="/ja/services" className="hover:text-white transition-colors">
                 {nav("services")}
               </Link>
-              <Link href="/ja/inheritance" className="hover:text-white transition-colors">
-                {nav("inheritance")}
+              <Link href="/ja/pricing" className="hover:text-white transition-colors">
+                {nav("pricing")}
               </Link>
               <Link href="/ja/company" className="hover:text-white transition-colors">
                 {nav("company")}
+              </Link>
+            </nav>
+          </div>
+
+          {/* Legal */}
+          <div className="flex flex-col gap-3">
+            <p className="text-sm font-semibold text-white">{t("legal_heading")}</p>
+            <nav className="flex flex-col gap-2 text-sm">
+              <Link href="/ja/legal" className="hover:text-white transition-colors">
+                特定商取引法に基づく表記
+              </Link>
+              <Link href="/ja/privacy" className="hover:text-white transition-colors">
+                プライバシーポリシー
+              </Link>
+              <Link href="/ja/terms" className="hover:text-white transition-colors">
+                利用規約
               </Link>
             </nav>
           </div>
