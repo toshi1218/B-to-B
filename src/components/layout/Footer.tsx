@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0d1423] text-gray-400">
       <div className="container-site py-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           {/* Brand */}
           <div className="flex flex-col gap-3">
             <span className="text-xl font-bold text-white">IGRS</span>
@@ -17,21 +17,37 @@ export default function Footer() {
             <p className="text-xs text-gray-500">株式会社ＩＧＲＳ</p>
           </div>
 
-          {/* Nav */}
+          {/* Services */}
           <div className="flex flex-col gap-3">
-            <p className="text-sm font-semibold text-white">{t("nav_heading")}</p>
+            <p className="text-sm font-semibold text-white">サービス</p>
             <nav className="flex flex-col gap-2 text-sm">
-              <Link href="/ja" className="hover:text-white transition-colors">
-                {nav("home")}
+              <Link href="/ja/drivers-license" className="hover:text-white transition-colors">
+                {nav("drivers_license")}
               </Link>
-              <Link href="/ja/services" className="hover:text-white transition-colors">
-                {nav("services")}
+              <Link href="/ja/ph-documents" className="hover:text-white transition-colors">
+                {nav("ph_documents")}
+              </Link>
+              <Link href="/ja/name-discrepancy" className="hover:text-white transition-colors">
+                {nav("name_discrepancy")}
               </Link>
               <Link href="/ja/inheritance" className="hover:text-white transition-colors">
                 {nav("inheritance")}
               </Link>
-              <Link href="/ja/company" className="hover:text-white transition-colors">
-                {nav("company")}
+            </nav>
+          </div>
+
+          {/* For Target */}
+          <div className="flex flex-col gap-3">
+            <p className="text-sm font-semibold text-white">対象の方へ</p>
+            <nav className="flex flex-col gap-2 text-sm">
+              <Link href="/ja/for-scriveners" className="hover:text-white transition-colors">
+                {nav("for_scriveners")}
+              </Link>
+              <Link href="/ja/for-support-org" className="hover:text-white transition-colors">
+                {nav("for_support_org")}
+              </Link>
+              <Link href="/ja/for-employers" className="hover:text-white transition-colors">
+                {nav("for_employers")}
               </Link>
             </nav>
           </div>

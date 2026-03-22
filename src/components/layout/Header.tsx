@@ -11,6 +11,12 @@ const navLinks = [
   { key: "company", href: "/ja/company" },
 ];
 
+const targetLinks = [
+  { key: "for_scriveners", href: "/ja/for-scriveners" },
+  { key: "for_support_org", href: "/ja/for-support-org" },
+  { key: "for_employers", href: "/ja/for-employers" },
+];
+
 export default function Header() {
   const t = useTranslations("nav");
   const [open, setOpen] = useState(false);
@@ -37,6 +43,21 @@ export default function Header() {
               {t(link.key)}
             </Link>
           ))}
+          {/* Desktop dropdown */}
+          <div className="relative group">
+            <button className="text-sm font-medium text-gray-700 hover:text-[#1a2846] transition-colors">
+              {t("for_target")}
+            </button>
+            <div className="invisible group-hover:visible absolute left-0 top-full pt-2 z-50">
+              <div className="rounded-lg border border-gray-200 bg-white shadow-lg py-2 min-w-[200px]">
+                {targetLinks.map((link) => (
+                  <Link key={link.key} href={link.href} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#1a2846]">
+                    {t(link.key)}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         </nav>
 
         {/* CTA */}
@@ -64,6 +85,17 @@ export default function Header() {
         <div className="md:hidden border-t border-gray-100 bg-white">
           <nav className="container-site flex flex-col py-4 gap-4">
             {navLinks.map((link) => (
+              <Link
+                key={link.key}
+                href={link.href}
+                className="text-base font-medium text-gray-700 hover:text-[#1a2846]"
+                onClick={() => setOpen(false)}
+              >
+                {t(link.key)}
+              </Link>
+            ))}
+            <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-gray-400">{t("for_target")}</p>
+            {targetLinks.map((link) => (
               <Link
                 key={link.key}
                 href={link.href}

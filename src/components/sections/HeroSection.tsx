@@ -1,9 +1,10 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { ArrowRight, FileText, Globe, MessageSquare } from "lucide-react";
+import { AlertCircle, ArrowRight, FileText, Globe, MessageSquare } from "lucide-react";
 
 export default function HeroSection() {
   const t = useTranslations("hero");
+  const painPoints = t.raw("pain_points") as string[];
 
   return (
     <section className="bg-gradient-to-br from-[#0d1423] via-[#1a2846] to-[#273c69] text-white">
@@ -19,9 +20,19 @@ export default function HeroSection() {
         </h1>
 
         {/* Sub */}
-        <p className="mb-10 max-w-2xl text-base text-gray-300 leading-relaxed md:text-lg">
+        <p className="mb-6 max-w-2xl text-base text-gray-300 leading-relaxed md:text-lg">
           {t("subtitle")}
         </p>
+
+        {/* Pain points */}
+        <ul className="mb-10 flex flex-col gap-3 max-w-2xl">
+          {painPoints.map((point, i) => (
+            <li key={i} className="flex items-start gap-3 rounded-lg bg-white/10 px-4 py-3">
+              <AlertCircle className="mt-0.5 shrink-0 text-amber-400" size={18} />
+              <span className="text-sm text-gray-200">{point}</span>
+            </li>
+          ))}
+        </ul>
 
         {/* CTAs */}
         <div className="flex flex-col gap-4 sm:flex-row">
