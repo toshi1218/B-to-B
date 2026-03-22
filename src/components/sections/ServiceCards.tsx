@@ -1,31 +1,31 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { FileText, Heart, Car, Building2, ArrowRight } from "lucide-react";
+import { FileText, Car, UserX, Building2, ArrowRight } from "lucide-react";
 
 const categories = [
   {
     key: "category_a",
-    icon: FileText,
-    href: "/ja/services#documents",
-    color: "bg-blue-50 text-blue-700",
+    icon: Car,
+    href: "/ja/drivers-license",
+    color: "bg-orange-50 text-orange-700",
   },
   {
     key: "category_b",
-    icon: Heart,
-    href: "/ja/services#marriage",
-    color: "bg-green-50 text-green-700",
+    icon: FileText,
+    href: "/ja/ph-documents",
+    color: "bg-blue-50 text-blue-700",
   },
   {
     key: "category_c",
-    icon: Car,
-    href: "/ja/services#lto",
-    color: "bg-orange-50 text-orange-700",
+    icon: UserX,
+    href: "/ja/name-discrepancy",
+    color: "bg-purple-50 text-purple-700",
   },
   {
     key: "category_d",
     icon: Building2,
     href: "/ja/inheritance",
-    color: "bg-purple-50 text-purple-700",
+    color: "bg-green-50 text-green-700",
   },
 ];
 

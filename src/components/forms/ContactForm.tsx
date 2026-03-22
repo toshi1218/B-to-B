@@ -83,18 +83,18 @@ export default function ContactForm() {
   }
 
   const industryOptions = [
-    { value: "law_firm", label: t("industry_options.law_firm") },
-    { value: "judicial_scrivener", label: t("industry_options.judicial_scrivener") },
     { value: "administrative_scrivener", label: t("industry_options.administrative_scrivener") },
+    { value: "support_org", label: t("industry_options.support_org") },
+    { value: "employer", label: t("industry_options.employer") },
     { value: "immigration", label: t("industry_options.immigration") },
-    { value: "real_estate", label: t("industry_options.real_estate") },
     { value: "other", label: t("industry_options.other") },
   ];
 
   const categoryOptions = [
+    { value: "drivers_license", label: t("category_options.drivers_license") },
     { value: "documents", label: t("category_options.documents") },
+    { value: "name_discrepancy", label: t("category_options.name_discrepancy") },
     { value: "marriage", label: t("category_options.marriage") },
-    { value: "lto", label: t("category_options.lto") },
     { value: "inheritance", label: t("category_options.inheritance") },
     { value: "other", label: t("category_options.other") },
   ];
