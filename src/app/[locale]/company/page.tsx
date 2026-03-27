@@ -1,7 +1,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import CTABanner from "@/components/sections/CTABanner";
-import { Building2, Hash, MapPin, Mail, Check, X, Globe, Users } from "lucide-react";
+import { Building2, Hash, MapPin, Mail, Check, X, Globe, Award } from "lucide-react";
 
 export async function generateMetadata({
   params,
@@ -23,7 +23,8 @@ export default async function CompanyPage({
   const t = await getTranslations({ locale, namespace: "company_page" });
 
   const companyInfo = [
-    { icon: Building2, label: t("name_label"), value: t("name") },
+    { icon: Building2, label: t("service_name_label"), value: t("service_name") },
+    { icon: Building2, label: t("entity_label"), value: t("entity") },
     { icon: Hash, label: t("number_label"), value: t("number") },
     { icon: MapPin, label: t("address_label"), value: t("address") },
     { icon: Mail, label: t("email_label"), value: t("email") },
@@ -58,8 +59,8 @@ export default async function CompanyPage({
               </dl>
             </div>
 
-            {/* What we do / don't */}
-            <div className="flex flex-col gap-8">
+            {/* What we do / don't / credential */}
+            <div className="flex flex-col gap-6">
               {/* What we do */}
               <div className="rounded-lg border border-blue-200 bg-blue-50 p-6">
                 <div className="mb-3 flex items-center gap-2">
@@ -78,13 +79,13 @@ export default async function CompanyPage({
                 <p className="text-sm text-amber-800 leading-relaxed">{t("what_we_dont")}</p>
               </div>
 
-              {/* Partner */}
+              {/* Credential */}
               <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
                 <div className="mb-3 flex items-center gap-2">
-                  <Users size={18} className="text-gray-700" />
-                  <h3 className="font-bold text-gray-900">{t("partner_heading")}</h3>
+                  <Award size={18} className="text-gray-700" />
+                  <h3 className="font-bold text-gray-900">{t("credential_heading")}</h3>
                 </div>
-                <p className="text-sm text-gray-700 leading-relaxed">{t("partner")}</p>
+                <p className="text-sm text-gray-700 leading-relaxed">{t("credential")}</p>
               </div>
             </div>
           </div>
