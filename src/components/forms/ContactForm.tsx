@@ -82,34 +82,17 @@ export default function ContactForm() {
     );
   }
 
-  const industryOptions = [
-    { value: "law_firm", label: t("industry_options.law_firm") },
-    { value: "judicial_scrivener", label: t("industry_options.judicial_scrivener") },
-    { value: "administrative_scrivener", label: t("industry_options.administrative_scrivener") },
-    { value: "immigration", label: t("industry_options.immigration") },
-    { value: "real_estate", label: t("industry_options.real_estate") },
-    { value: "other", label: t("industry_options.other") },
-  ];
-
-  const categoryOptions = [
-    { value: "documents", label: t("category_options.documents") },
-    { value: "marriage", label: t("category_options.marriage") },
-    { value: "lto", label: t("category_options.lto") },
-    { value: "inheritance", label: t("category_options.inheritance") },
-    { value: "other", label: t("category_options.other") },
+  const planOptions = [
+    { value: "light", label: t("plan_options.light") },
+    { value: "standard", label: t("plan_options.standard") },
+    { value: "premium", label: t("plan_options.premium") },
+    { value: "monthly_light", label: t("plan_options.monthly_light") },
+    { value: "monthly_standard", label: t("plan_options.monthly_standard") },
+    { value: "undecided", label: t("plan_options.undecided") },
   ];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-      {/* Company */}
-      <Field label={tf("company_label")} required error={errors.company?.message}>
-        <input
-          {...register("company")}
-          placeholder={tf("company_placeholder")}
-          className={inputClass}
-        />
-      </Field>
-
       {/* Name */}
       <Field label={tf("name_label")} required error={errors.name?.message}>
         <input
@@ -129,23 +112,21 @@ export default function ContactForm() {
         />
       </Field>
 
-      {/* Industry */}
-      <Field label={tf("industry_label")} required error={errors.industry?.message}>
-        <select {...register("industry")} className={inputClass}>
-          <option value="">{tf("industry_placeholder")}</option>
-          {industryOptions.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+      {/* Property */}
+      <Field label={tf("property_label")} required error={errors.property?.message}>
+        <textarea
+          {...register("property")}
+          rows={3}
+          placeholder={tf("property_placeholder")}
+          className={inputClass}
+        />
       </Field>
 
-      {/* Category */}
-      <Field label={tf("category_label")} required error={errors.category?.message}>
-        <select {...register("category")} className={inputClass}>
-          <option value="">{tf("category_placeholder")}</option>
-          {categoryOptions.map((opt) => (
+      {/* Plan */}
+      <Field label={tf("plan_label")} required error={errors.plan?.message}>
+        <select {...register("plan")} className={inputClass}>
+          <option value="">{tf("plan_placeholder")}</option>
+          {planOptions.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>
@@ -161,35 +142,6 @@ export default function ContactForm() {
           placeholder={tf("details_placeholder")}
           className={inputClass}
         />
-      </Field>
-
-      {/* Delivery date */}
-      <Field label={tf("delivery_label")} required={false}>
-        <input {...register("deliveryDate")} type="date" className={inputClass} />
-      </Field>
-
-      {/* Usage plan */}
-      <Field label={tf("usage_label")} required error={errors.usagePlan?.message}>
-        <div className="flex gap-6">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              {...register("usagePlan")}
-              type="radio"
-              value="ongoing"
-              className="accent-[#1a2846]"
-            />
-            <span className="text-sm text-gray-700">{tf("ongoing")}</span>
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              {...register("usagePlan")}
-              type="radio"
-              value="one_time"
-              className="accent-[#1a2846]"
-            />
-            <span className="text-sm text-gray-700">{tf("one_time")}</span>
-          </label>
-        </div>
       </Field>
 
       {/* Error message */}

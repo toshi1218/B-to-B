@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { key: "services", href: "/ja/services" },
-  { key: "inheritance", href: "/ja/inheritance" },
+  { key: "faq", href: "/ja/faq" },
   { key: "company", href: "/ja/company" },
 ];
 
@@ -21,9 +21,9 @@ export default function Header() {
         {/* Logo */}
         <Link
           href="/ja"
-          className="text-xl font-bold text-[#1a2846] tracking-wide"
+          className="text-lg font-bold text-[#1a2846] tracking-wide"
         >
-          IGRS
+          Cebu Buyer&apos;s Desk
         </Link>
 
         {/* Desktop nav */}
