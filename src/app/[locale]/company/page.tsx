@@ -1,7 +1,11 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import CTABanner from "@/components/sections/CTABanner";
+import { Breadcrumb } from "@/components/seo/Breadcrumb";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Building2, Hash, MapPin, Mail, Check, X, Globe, Award } from "lucide-react";
+
+const BASE_URL = "https://ph-document.com";
 
 export async function generateMetadata({
   params,
@@ -10,7 +14,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata.company" });
-  return { title: t("title"), description: t("description") };
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: "/ja/company/",
+      languages: { ja: "/ja/company/", "x-default": "/ja/company/" },
+    },
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      url: "/ja/company/",
+    },
+  };
 }
 
 export default async function CompanyPage({
@@ -31,8 +47,34 @@ export default async function CompanyPage({
     { icon: Globe, label: t("lang_heading"), value: t("lang") },
   ];
 
+  const companySchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${BASE_URL}/ja/company/`,
+    url: `${BASE_URL}/ja/company/`,
+    name: t("heading"),
+    description: t("subheading"),
+    about: {
+      "@id": `${BASE_URL}/#organization`,
+      "@type": "Organization",
+      name: t("service_name"),
+      legalName: t("entity"),
+      identifier: t("number"),
+      email: t("email"),
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "和歌山市",
+        addressRegion: "和歌山県",
+        addressCountry: "JP",
+      },
+      description: t("what_we_do"),
+    },
+  };
+
   return (
     <>
+      <Breadcrumb items={[{ label: t("heading"), href: "/ja/company/" }]} />
+      <JsonLd data={companySchema} />
       <div className="bg-[#f0f3f9] py-14">
         <div className="container-site">
           <h1 className="text-3xl font-bold text-[#1a2846] md:text-4xl">{t("heading")}</h1>

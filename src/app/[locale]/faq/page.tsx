@@ -1,6 +1,8 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import CTABanner from "@/components/sections/CTABanner";
+import { Breadcrumb } from "@/components/seo/Breadcrumb";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ChevronDown } from "lucide-react";
 
 export async function generateMetadata({
@@ -10,7 +12,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata.faq" });
-  return { title: t("title"), description: t("description") };
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: "/ja/faq/",
+      languages: { ja: "/ja/faq/", "x-default": "/ja/faq/" },
+    },
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      url: "/ja/faq/",
+    },
+  };
 }
 
 export default async function FaqPage({
@@ -25,8 +39,25 @@ export default async function FaqPage({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const items = (t as any).raw("items") as { q: string; a: string }[];
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    name: t("heading"),
+    description: t("subheading"),
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
   return (
     <>
+      <Breadcrumb items={[{ label: t("heading"), href: "/ja/faq/" }]} />
+      <JsonLd data={faqSchema} />
       <div className="bg-[#f0f3f9] py-14">
         <div className="container-site">
           <h1 className="text-3xl font-bold text-[#1a2846] md:text-4xl">{t("heading")}</h1>

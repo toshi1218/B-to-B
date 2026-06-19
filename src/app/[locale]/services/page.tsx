@@ -1,8 +1,12 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import CTABanner from "@/components/sections/CTABanner";
+import { Breadcrumb } from "@/components/seo/Breadcrumb";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Check, Clock, FileText, AlertCircle } from "lucide-react";
 import Link from "next/link";
+
+const BASE_URL = "https://ph-document.com";
 
 export async function generateMetadata({
   params,
@@ -11,7 +15,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata.services" });
-  return { title: t("title"), description: t("description") };
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: "/ja/services/",
+      languages: { ja: "/ja/services/", "x-default": "/ja/services/" },
+    },
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      url: "/ja/services/",
+    },
+  };
 }
 
 type PlanData = {
@@ -190,8 +206,59 @@ export default async function ServicesPage({
     },
   ];
 
+  const serviceListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${BASE_URL}/ja/services/#service-list`,
+    name: "セブコンドミニアム デューデリジェンス プラン一覧",
+    description: raw("subheading"),
+    url: `${BASE_URL}/ja/services/`,
+    numberOfItems: plans.length + monthlyPlans.length,
+    itemListElement: [
+      ...plans.map((plan, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "Service",
+          "@id": `${BASE_URL}/ja/services/#${plan.id}`,
+          name: plan.name,
+          description: plan.tagline,
+          offers: {
+            "@type": "Offer",
+            price: plan.price,
+            priceCurrency: "JPY",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: plan.price,
+              priceCurrency: "JPY",
+              unitText: plan.unit,
+            },
+          },
+          provider: { "@id": `${BASE_URL}/#organization` },
+          areaServed: { "@type": "Country", name: "Philippines" },
+        },
+      })),
+      ...monthlyPlans.map((plan, i) => ({
+        "@type": "ListItem",
+        position: plans.length + i + 1,
+        item: {
+          "@type": "Service",
+          name: plan.name,
+          offers: {
+            "@type": "Offer",
+            price: plan.price,
+            priceCurrency: "JPY",
+          },
+          provider: { "@id": `${BASE_URL}/#organization` },
+        },
+      })),
+    ],
+  };
+
   return (
     <>
+      <Breadcrumb items={[{ label: t("heading"), href: "/ja/services/" }]} />
+      <JsonLd data={serviceListSchema} />
       <div className="bg-[#f0f3f9] py-14">
         <div className="container-site">
           <h1 className="text-3xl font-bold text-[#1a2846] md:text-4xl">{t("heading")}</h1>
