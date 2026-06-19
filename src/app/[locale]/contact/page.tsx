@@ -34,16 +34,14 @@ export default async function ContactPage({
       <div className="bg-white py-16">
         <div className="container-site">
           <div className="grid grid-cols-1 gap-14 lg:grid-cols-3">
-            {/* Form */}
             <div className="lg:col-span-2">
-              <p className="mb-8 text-gray-600 leading-relaxed">{t("intro")}</p>
+              <p className="mb-8 leading-relaxed text-gray-600">{t("intro")}</p>
               <ContactForm />
             </div>
 
-            {/* Sidebar */}
             <div className="flex flex-col gap-6">
               <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
-                <div className="flex items-center gap-2 mb-3">
+                <div className="mb-3 flex items-center gap-2">
                   <Mail size={18} className="text-[#1a2846]" />
                   <p className="font-semibold text-gray-900">メールでのお問い合わせ</p>
                 </div>
@@ -56,18 +54,19 @@ export default async function ContactPage({
               </div>
 
               <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
-                <div className="flex items-center gap-2 mb-3">
+                <div className="mb-3 flex items-center gap-2">
                   <Clock size={18} className="text-[#1a2846]" />
                   <p className="font-semibold text-gray-900">返信について</p>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  2営業日以内にご連絡いたします。まず「買う前に確認すべき論点」を整理してお返しします。プランが決まっていない方もご相談ください。
+                <p className="text-sm leading-relaxed text-gray-600">
+                  2営業日以内にご連絡いたします。まずは購入前に確認すべき論点を整理してお返しします。
+                  プランが決まっていない方もご相談ください。
                 </p>
               </div>
 
               <div className="rounded-lg border border-[#1a2846]/20 bg-[#f0f3f9] p-6">
-                <p className="text-sm font-semibold text-[#1a2846] mb-2">対応できるご相談</p>
-                <ul className="text-sm text-gray-700 space-y-1">
+                <p className="mb-2 text-sm font-semibold text-[#1a2846]">対応できるご相談</p>
+                <ul className="space-y-1 text-sm text-gray-700">
                   <li>・ 気になる物件の論点整理</li>
                   <li>・ プランの選定サポート</li>
                   <li>・ 現地確認の依頼</li>
@@ -79,8 +78,8 @@ export default async function ContactPage({
               <div className="rounded-lg border border-amber-200 bg-amber-50 p-5">
                 <div className="flex items-start gap-2">
                   <AlertCircle size={16} className="mt-0.5 shrink-0 text-amber-600" />
-                  <p className="text-xs text-amber-700 leading-relaxed">
-                    当社は不動産売買の媒介・勧誘は行いません。購入を促す案内はお送りしません。
+                  <p className="text-xs leading-relaxed text-amber-700">
+                    当社は不動産売買の仲介や勧誘は行いません。購入を促す案件紹介はお受けしていません。
                   </p>
                 </div>
               </div>

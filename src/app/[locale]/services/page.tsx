@@ -30,7 +30,7 @@ function PlanCard({ plan, featured }: { plan: PlanData; featured?: boolean }) {
   return (
     <div
       id={plan.id}
-      className={`scroll-mt-24 relative flex flex-col rounded-lg border bg-white p-8 ${
+      className={`relative flex scroll-mt-24 flex-col rounded-lg border bg-white p-8 ${
         featured ? "border-[#1a2846] ring-2 ring-[#1a2846]/20" : "border-gray-200"
       }`}
     >
@@ -86,7 +86,7 @@ function PlanCard({ plan, featured }: { plan: PlanData; featured?: boolean }) {
             : "border border-[#1a2846] text-[#1a2846] hover:bg-[#f0f3f9]"
         }`}
       >
-        このプランで依頼する
+        このプランで相談する
       </Link>
     </div>
   );
@@ -117,9 +117,9 @@ function MonthlyCard({ plan }: { plan: MonthlyPlan }) {
       </ul>
       <Link
         href="/ja/contact"
-        className="mt-5 inline-flex items-center justify-center rounded border border-[#1a2846] px-5 py-2.5 text-sm font-bold text-[#1a2846] hover:bg-[#f0f3f9] transition-colors"
+        className="mt-5 inline-flex items-center justify-center rounded border border-[#1a2846] px-5 py-2.5 text-sm font-bold text-[#1a2846] transition-colors hover:bg-[#f0f3f9]"
       >
-        このプランで依頼する
+        このプランで相談する
       </Link>
     </div>
   );
@@ -135,8 +135,11 @@ export default async function ServicesPage({
 
   const t = await getTranslations({ locale, namespace: "services_page" });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const raw = t as any;
+  // next-intl returns arrays via raw(); keep this local to the page data mapping.
+  const raw = t as unknown as {
+    (key: string): string;
+    raw: (key: string) => unknown;
+  };
 
   const plans: PlanData[] = [
     {
@@ -196,7 +199,6 @@ export default async function ServicesPage({
         </div>
       </div>
 
-      {/* One-time plans */}
       <div className="bg-white py-16">
         <div className="container-site">
           <h2 className="mb-2 text-2xl font-bold text-gray-900">{t("one_time_heading")}</h2>
@@ -210,13 +212,12 @@ export default async function ServicesPage({
         </div>
       </div>
 
-      {/* Monthly plans */}
       <div className="bg-gray-50 py-16">
         <div className="container-site">
           <h2 className="mb-2 text-2xl font-bold text-gray-900">{t("monthly_heading")}</h2>
           <p className="mb-10 text-gray-600">{t("monthly_subheading")}</p>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-2xl">
+          <div className="grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2">
             {monthlyPlans.map((plan) => (
               <MonthlyCard key={plan.name} plan={plan} />
             ))}
@@ -224,14 +225,13 @@ export default async function ServicesPage({
         </div>
       </div>
 
-      {/* Note */}
       <div className="bg-white py-10">
         <div className="container-site">
-          <div className="flex gap-4 rounded-lg border border-amber-200 bg-amber-50 p-5 max-w-3xl">
+          <div className="flex max-w-3xl gap-4 rounded-lg border border-amber-200 bg-amber-50 p-5">
             <AlertCircle className="mt-0.5 shrink-0 text-amber-600" size={20} />
             <div>
               <p className="mb-1 text-sm font-bold text-amber-800">{t("note_heading")}</p>
-              <p className="text-sm text-amber-700 leading-relaxed">{t("note_text")}</p>
+              <p className="text-sm leading-relaxed text-amber-700">{t("note_text")}</p>
             </div>
           </div>
         </div>
