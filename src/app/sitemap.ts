@@ -9,6 +9,7 @@ const pages = [
   "/tokutei-gino",
   "/documents",
   "/apostille",
+  "/genpon-apostille",
   "/services",
   "/cases",
   "/faq",

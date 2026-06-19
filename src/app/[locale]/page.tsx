@@ -34,8 +34,8 @@ export default async function HomePage({
     <>
       <HeroSection />
       <ServiceCards />
-      <WhyIGRS />
       <TargetAudience />
+      <WhyIGRS />
       <FlowSection />
       <Disclaimer />
       <CTABanner />

@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import CTABanner from "@/components/sections/CTABanner";
 import StepDiagram from "@/components/sections/StepDiagram";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -30,6 +30,7 @@ export default async function GyoseishoshiPage({
   type UseCase = { title: string; desc: string };
   const useCases = raw.raw("use_cases") as UseCase[];
   const docs = raw.raw("docs") as string[];
+  const pains = raw.raw("pains") as string[];
 
   const steps = [
     { title: flowT("step1_title"), desc: flowT("step1_desc") },
@@ -52,6 +53,21 @@ export default async function GyoseishoshiPage({
       <div className="bg-white py-14">
         <div className="container-site max-w-3xl">
           <p className="text-base leading-relaxed text-gray-700">{t("intro")}</p>
+        </div>
+      </div>
+
+      {/* Pain points */}
+      <div className="bg-red-50 border-y border-red-100 py-10">
+        <div className="container-site max-w-3xl">
+          <h2 className="mb-5 text-lg font-bold text-red-900">{t("pain_heading")}</h2>
+          <ul className="flex flex-col gap-3">
+            {pains.map((pain, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="mt-0.5 shrink-0 font-bold text-red-500">✕</span>
+                <span className="text-sm text-red-800 leading-relaxed">{pain}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
@@ -87,6 +103,22 @@ export default async function GyoseishoshiPage({
               対応書類の全一覧を見る
               <ArrowRight size={14} />
             </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Genpon apostille block */}
+      <div className="bg-amber-50 border-y border-amber-200 py-10">
+        <div className="container-site max-w-3xl">
+          <div className="flex gap-3">
+            <AlertTriangle className="mt-0.5 shrink-0 text-amber-600" size={20} />
+            <div>
+              <h2 className="mb-2 font-bold text-amber-900">{t("genpon_heading")}</h2>
+              <p className="text-sm text-amber-800 leading-relaxed">{t("genpon_desc")}</p>
+              <Link href="/ja/genpon-apostille" className="mt-3 inline-block text-sm font-medium text-amber-900 underline underline-offset-2 hover:text-amber-700">
+                {t("genpon_link")}
+              </Link>
+            </div>
           </div>
         </div>
       </div>

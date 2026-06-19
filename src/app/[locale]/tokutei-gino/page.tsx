@@ -28,6 +28,7 @@ export default async function TokuteiGinoPage({
   type Why = { title: string; desc: string };
   const whys = raw.raw("whys") as Why[];
   const docs = raw.raw("docs") as string[];
+  const pains = raw.raw("pains") as string[];
 
   return (
     <>
@@ -42,6 +43,21 @@ export default async function TokuteiGinoPage({
       <div className="bg-white py-14">
         <div className="container-site max-w-3xl">
           <p className="text-base leading-relaxed text-gray-700">{t("intro")}</p>
+        </div>
+      </div>
+
+      {/* Pain points */}
+      <div className="bg-red-50 border-y border-red-100 py-10">
+        <div className="container-site max-w-3xl">
+          <h2 className="mb-5 text-lg font-bold text-red-900">{t("pain_heading")}</h2>
+          <ul className="flex flex-col gap-3">
+            {pains.map((pain, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="mt-0.5 shrink-0 text-red-500">✕</span>
+                <span className="text-sm text-red-800 leading-relaxed">{pain}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 

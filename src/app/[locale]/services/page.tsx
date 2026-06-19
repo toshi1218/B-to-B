@@ -27,11 +27,15 @@ export default async function ServicesPage({
 
   type DocRow = { name: string; price: string; note?: string };
   type MonthlyPlan = { name: string; price: string; items: string[] };
+  type StepTimeline = { step: string; duration: string; note?: string };
+  type PatternTimeline = { pattern: string; use: string; duration: string };
 
   const docs = raw.raw("docs") as DocRow[];
   const auths = raw.raw("auths") as DocRow[];
   const translations = raw.raw("translations") as DocRow[];
   const monthlyPlans = raw.raw("monthly_plans") as MonthlyPlan[];
+  const stepTimelines = raw.raw("step_timelines") as StepTimeline[];
+  const patternTimelines = raw.raw("pattern_timelines") as PatternTimeline[];
 
   return (
     <>
@@ -136,6 +140,59 @@ export default async function ServicesPage({
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Timeline */}
+      <div className="bg-white py-12">
+        <div className="container-site">
+          <h2 className="mb-2 text-xl font-bold text-gray-900">{t("timeline_heading")}</h2>
+          <p className="mb-8 text-sm text-gray-600 max-w-3xl">{t("timeline_intro")}</p>
+
+          <h3 className="mb-4 text-base font-semibold text-gray-700">工程別の目安</h3>
+          <div className="overflow-hidden rounded-lg border border-gray-200 mb-10">
+            <table className="w-full text-sm">
+              <thead className="bg-[#f0f3f9]">
+                <tr>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-700">工程</th>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-700">目安日数</th>
+                  <th className="hidden px-5 py-3 text-left font-semibold text-gray-700 sm:table-cell">備考</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {stepTimelines.map((row, i) => (
+                  <tr key={i} className="hover:bg-gray-50">
+                    <td className="px-5 py-4 font-medium text-gray-900">{row.step}</td>
+                    <td className="px-5 py-4 font-semibold text-[#1a2846] whitespace-nowrap">{row.duration}</td>
+                    <td className="hidden px-5 py-4 text-gray-500 sm:table-cell">{row.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3 className="mb-4 text-base font-semibold text-gray-700">案件パターン別の目安</h3>
+          <div className="overflow-hidden rounded-lg border border-gray-200 mb-6">
+            <table className="w-full text-sm">
+              <thead className="bg-[#f0f3f9]">
+                <tr>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-700">パターン</th>
+                  <th className="hidden px-5 py-3 text-left font-semibold text-gray-700 sm:table-cell">主な用途</th>
+                  <th className="px-5 py-3 text-left font-semibold text-gray-700">目安</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {patternTimelines.map((row, i) => (
+                  <tr key={i} className="hover:bg-gray-50">
+                    <td className="px-5 py-4 font-medium text-gray-900">{row.pattern}</td>
+                    <td className="hidden px-5 py-4 text-gray-500 sm:table-cell">{row.use}</td>
+                    <td className="px-5 py-4 font-semibold text-[#1a2846] whitespace-nowrap">{row.duration}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-sm text-gray-600 leading-relaxed max-w-3xl">{t("timeline_note")}</p>
         </div>
       </div>
 

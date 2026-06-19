@@ -86,6 +86,7 @@ export default function ContactForm() {
     { value: "psa", label: t("type_options.psa") },
     { value: "nbi", label: t("type_options.nbi") },
     { value: "apostille", label: t("type_options.apostille") },
+    { value: "genpon", label: t("type_options.genpon") },
     { value: "translation", label: t("type_options.translation") },
     { value: "monthly", label: t("type_options.monthly") },
     { value: "other", label: t("type_options.other") },
@@ -127,6 +128,22 @@ export default function ContactForm() {
             </option>
           ))}
         </select>
+      </Field>
+
+      <Field label={tf("destination_label")} error={errors.destination?.message}>
+        <input
+          {...register("destination")}
+          placeholder={tf("destination_placeholder")}
+          className={inputClass}
+        />
+      </Field>
+
+      <Field label={tf("deadline_label")} error={errors.deadline?.message}>
+        <input
+          {...register("deadline")}
+          placeholder={tf("deadline_placeholder")}
+          className={inputClass}
+        />
       </Field>
 
       <Field label={tf("details_label")} required error={errors.details?.message}>

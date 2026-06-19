@@ -2,7 +2,8 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import CTABanner from "@/components/sections/CTABanner";
 import StepDiagram from "@/components/sections/StepDiagram";
-import { Check, Info } from "lucide-react";
+import { Check, Info, AlertTriangle } from "lucide-react";
+import Link from "next/link";
 
 export async function generateMetadata({
   params,
@@ -36,6 +37,22 @@ export default async function ApostillePage({
         <div className="container-site">
           <h1 className="text-3xl font-bold text-[#1a2846] md:text-4xl">{t("heading")}</h1>
           <p className="mt-3 text-gray-600">{t("subheading")}</p>
+        </div>
+      </div>
+
+      {/* DFA notice */}
+      <div className="bg-amber-50 border-b border-amber-200 py-5">
+        <div className="container-site max-w-4xl">
+          <div className="flex gap-3">
+            <AlertTriangle className="mt-0.5 shrink-0 text-amber-600" size={20} />
+            <div>
+              <p className="mb-1 font-bold text-amber-900">{t("dfa_notice_heading")}</p>
+              <p className="text-sm text-amber-800 leading-relaxed">{t("dfa_notice_desc")}</p>
+              <Link href="/ja/genpon-apostille" className="mt-2 inline-block text-sm font-medium text-amber-900 underline underline-offset-2 hover:text-amber-700">
+                {t("dfa_notice_link")}
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -73,6 +90,12 @@ export default async function ApostillePage({
               <h2 className="font-bold text-blue-900">{t("diff_heading")}</h2>
             </div>
             <p className="text-sm text-blue-800 leading-relaxed">{t("diff_desc")}</p>
+          </section>
+
+          {/* Timeline */}
+          <section>
+            <h2 className="mb-3 text-xl font-bold text-gray-900">{t("timeline_heading")}</h2>
+            <p className="text-sm text-gray-600 leading-relaxed">{t("timeline_desc")}</p>
           </section>
 
           {/* Price */}
