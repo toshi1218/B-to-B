@@ -25,6 +25,10 @@ export async function generateMetadata({
     },
     description: t("home.description"),
     metadataBase: new URL("https://ph-document.com"),
+    robots: {
+      index: false,
+      follow: false,
+    },
   };
 }
 
