@@ -1,18 +1,13 @@
 import { z } from "zod";
 
 export const contactFormSchema = z.object({
-  name: z.string().min(1, "お名前を入力してください"),
+  org: z.string().optional(),
+  name: z.string().min(1, "担当者名を入力してください"),
   email: z.string().email("正しいメールアドレスを入力してください"),
-  property: z.string().min(1, "物件情報を入力してください"),
-  plan: z.enum([
-    "light",
-    "standard",
-    "premium",
-    "monthly_light",
-    "monthly_standard",
-    "undecided",
-  ]),
-  details: z.string().min(10, "確認してほしいことを10文字以上で入力してください"),
+  type: z.enum(["psa", "nbi", "apostille", "translation", "monthly", "other"], {
+    required_error: "ご依頼の種類を選択してください",
+  }),
+  details: z.string().min(10, "10文字以上でご記入ください"),
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;

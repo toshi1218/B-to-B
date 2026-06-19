@@ -82,18 +82,25 @@ export default function ContactForm() {
     );
   }
 
-  const planOptions = [
-    { value: "light", label: t("plan_options.light") },
-    { value: "standard", label: t("plan_options.standard") },
-    { value: "premium", label: t("plan_options.premium") },
-    { value: "monthly_light", label: t("plan_options.monthly_light") },
-    { value: "monthly_standard", label: t("plan_options.monthly_standard") },
-    { value: "undecided", label: t("plan_options.undecided") },
+  const typeOptions = [
+    { value: "psa", label: t("type_options.psa") },
+    { value: "nbi", label: t("type_options.nbi") },
+    { value: "apostille", label: t("type_options.apostille") },
+    { value: "translation", label: t("type_options.translation") },
+    { value: "monthly", label: t("type_options.monthly") },
+    { value: "other", label: t("type_options.other") },
   ];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-      {/* Name */}
+      <Field label={tf("org_label")} error={errors.org?.message}>
+        <input
+          {...register("org")}
+          placeholder={tf("org_placeholder")}
+          className={inputClass}
+        />
+      </Field>
+
       <Field label={tf("name_label")} required error={errors.name?.message}>
         <input
           {...register("name")}
@@ -102,7 +109,6 @@ export default function ContactForm() {
         />
       </Field>
 
-      {/* Email */}
       <Field label={tf("email_label")} required error={errors.email?.message}>
         <input
           {...register("email")}
@@ -112,21 +118,10 @@ export default function ContactForm() {
         />
       </Field>
 
-      {/* Property */}
-      <Field label={tf("property_label")} required error={errors.property?.message}>
-        <textarea
-          {...register("property")}
-          rows={3}
-          placeholder={tf("property_placeholder")}
-          className={inputClass}
-        />
-      </Field>
-
-      {/* Plan */}
-      <Field label={tf("plan_label")} required error={errors.plan?.message}>
-        <select {...register("plan")} className={inputClass}>
-          <option value="">{tf("plan_placeholder")}</option>
-          {planOptions.map((opt) => (
+      <Field label={tf("type_label")} required error={errors.type?.message}>
+        <select {...register("type")} className={inputClass}>
+          <option value="">{tf("type_placeholder")}</option>
+          {typeOptions.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>
@@ -134,7 +129,6 @@ export default function ContactForm() {
         </select>
       </Field>
 
-      {/* Details */}
       <Field label={tf("details_label")} required error={errors.details?.message}>
         <textarea
           {...register("details")}
@@ -144,7 +138,6 @@ export default function ContactForm() {
         />
       </Field>
 
-      {/* Error message */}
       {status === "error" && (
         <p className="text-sm text-red-600">{t("error")}</p>
       )}

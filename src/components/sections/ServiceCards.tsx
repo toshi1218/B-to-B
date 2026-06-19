@@ -1,29 +1,28 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { MapPin, ClipboardCheck, Shield, ArrowRight } from "lucide-react";
+import { FileText, Stamp, Users, ArrowRight } from "lucide-react";
 
-const plans = [
+const cards = [
   {
-    key: "plan_light",
-    icon: MapPin,
-    href: "/ja/services#light",
+    key: "card1",
+    icon: FileText,
+    href: "/ja/documents",
     color: "bg-blue-50 text-blue-700",
     border: "border-blue-100",
   },
   {
-    key: "plan_standard",
-    icon: ClipboardCheck,
-    href: "/ja/services#standard",
-    color: "bg-green-50 text-green-700",
-    border: "border-green-100",
-    badge: true,
+    key: "card2",
+    icon: Stamp,
+    href: "/ja/apostille",
+    color: "bg-indigo-50 text-indigo-700",
+    border: "border-indigo-100",
   },
   {
-    key: "plan_premium",
-    icon: Shield,
-    href: "/ja/services#premium",
-    color: "bg-purple-50 text-purple-700",
-    border: "border-purple-100",
+    key: "card3",
+    icon: Users,
+    href: "/ja/services",
+    color: "bg-slate-50 text-slate-700",
+    border: "border-slate-100",
   },
 ];
 
@@ -39,25 +38,17 @@ export default function ServiceCards() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-          {plans.map(({ key, icon: Icon, href, color, border, badge }) => (
+          {cards.map(({ key, icon: Icon, href, color, border }) => (
             <div
               key={key}
-              className={`relative flex flex-col rounded-lg border ${border} bg-white p-6 hover:shadow-md transition-shadow`}
+              className={`flex flex-col rounded-lg border ${border} bg-white p-6 hover:shadow-md transition-shadow`}
             >
-              {badge && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#1a2846] px-3 py-1 text-xs font-bold text-white">
-                  一番人気
-                </span>
-              )}
               <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg ${color}`}>
                 <Icon size={24} />
               </div>
-              <h3 className="mb-1 text-lg font-bold text-gray-900">
+              <h3 className="mb-3 text-lg font-bold text-gray-900">
                 {t(`${key}.title`)}
               </h3>
-              <p className="mb-2 text-sm font-semibold text-[#1a2846]">
-                {t(`${key}.price`)}
-              </p>
               <p className="mb-4 flex-1 text-sm text-gray-600 leading-relaxed">
                 {t(`${key}.description`)}
               </p>

@@ -1,7 +1,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import ContactForm from "@/components/forms/ContactForm";
-import { Mail, Clock, AlertCircle } from "lucide-react";
+import { Mail, Clock, CheckCircle2 } from "lucide-react";
 
 export async function generateMetadata({
   params,
@@ -21,6 +21,8 @@ export default async function ContactPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "contact_page" });
+  const raw = t as unknown as { (key: string): string; raw: (key: string) => unknown };
+  const sidebarItems = raw.raw("sidebar_support_items") as string[];
 
   return (
     <>
@@ -43,7 +45,7 @@ export default async function ContactPage({
               <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
                 <div className="mb-3 flex items-center gap-2">
                   <Mail size={18} className="text-[#1a2846]" />
-                  <p className="font-semibold text-gray-900">メールでのお問い合わせ</p>
+                  <p className="font-semibold text-gray-900">{t("sidebar_contact")}</p>
                 </div>
                 <a
                   href="mailto:info@ph-document.com"
@@ -56,32 +58,23 @@ export default async function ContactPage({
               <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
                 <div className="mb-3 flex items-center gap-2">
                   <Clock size={18} className="text-[#1a2846]" />
-                  <p className="font-semibold text-gray-900">返信について</p>
+                  <p className="font-semibold text-gray-900">{t("sidebar_response")}</p>
                 </div>
                 <p className="text-sm leading-relaxed text-gray-600">
-                  2営業日以内にご連絡いたします。まずは購入前に確認すべき論点を整理してお返しします。
-                  プランが決まっていない方もご相談ください。
+                  {t("sidebar_response_text")}
                 </p>
               </div>
 
               <div className="rounded-lg border border-[#1a2846]/20 bg-[#f0f3f9] p-6">
-                <p className="mb-2 text-sm font-semibold text-[#1a2846]">対応できるご相談</p>
-                <ul className="space-y-1 text-sm text-gray-700">
-                  <li>・ 気になる物件の論点整理</li>
-                  <li>・ プランの選定サポート</li>
-                  <li>・ 現地確認の依頼</li>
-                  <li>・ DHSUD確認・公的情報確認</li>
-                  <li>・ 継続監視プランの相談</li>
+                <p className="mb-3 text-sm font-semibold text-[#1a2846]">{t("sidebar_support")}</p>
+                <ul className="flex flex-col gap-2">
+                  {sidebarItems.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[#1a2846]" />
+                      <span className="text-sm text-gray-700">{item}</span>
+                    </li>
+                  ))}
                 </ul>
-              </div>
-
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-5">
-                <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="mt-0.5 shrink-0 text-amber-600" />
-                  <p className="text-xs leading-relaxed text-amber-700">
-                    当社は不動産売買の仲介や勧誘は行いません。購入を促す案件紹介はお受けしていません。
-                  </p>
-                </div>
               </div>
             </div>
           </div>

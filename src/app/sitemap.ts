@@ -3,7 +3,18 @@ import { MetadataRoute } from "next";
 export const dynamic = "force-static";
 
 const BASE_URL = "https://ph-document.com";
-const pages = ["", "/services", "/faq", "/contact", "/company"];
+const pages = [
+  "",
+  "/gyoseishoshi",
+  "/tokutei-gino",
+  "/documents",
+  "/apostille",
+  "/services",
+  "/cases",
+  "/faq",
+  "/company",
+  "/contact",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return pages.map((page) => ({
