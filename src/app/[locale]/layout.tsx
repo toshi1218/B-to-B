@@ -24,7 +24,7 @@ export async function generateMetadata({
       template: "%s",
     },
     description: t("home.description"),
-    metadataBase: new URL("https://ph-document.com"),
+    metadataBase: new URL("https://btob.pages.dev"),
   };
 }
 
