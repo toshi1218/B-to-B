@@ -6,7 +6,8 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { contactFormSchema, ContactFormData } from "@/lib/validations";
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
 
 interface FieldProps {
   label: string;
@@ -57,11 +58,20 @@ export default function ContactForm() {
 
   async function onSubmit(data: ContactFormData) {
     setStatus("idle");
+    if (!WEB3FORMS_KEY) {
+      setStatus("error");
+      return;
+    }
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: "Cebu Buyer's Desk 物件確認のお問い合わせ",
+          from_name: "Cebu Buyer's Desk",
+          ...data,
+        }),
       });
       if (res.ok) {
         setStatus("success");

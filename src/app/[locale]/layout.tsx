@@ -21,10 +21,10 @@ export async function generateMetadata({
   return {
     title: {
       default: t("siteName"),
-      template: `%s | IGRS`,
+      template: "%s",
     },
     description: t("home.description"),
-    metadataBase: new URL("https://ph-document.com"),
+    metadataBase: new URL("https://btob.pages.dev"),
   };
 }
 

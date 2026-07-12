@@ -1,4 +1,4 @@
-export const SITE_URL = "https://ph-document.com";
+export const SITE_URL = "https://btob.pages.dev";
 export const SITE_NAME = "Cebu Buyer's Desk";
 export const SITE_NAME_JA = "株式会社ＩＧＲＳ";
 
@@ -11,5 +11,5 @@ export const COMPANY = {
   city: "和歌山市",
   addressJa: "和歌山県和歌山市",
   email: "info@ph-document.com",
-  url: "https://ph-document.com",
+  url: "https://btob.pages.dev",
 } as const;
